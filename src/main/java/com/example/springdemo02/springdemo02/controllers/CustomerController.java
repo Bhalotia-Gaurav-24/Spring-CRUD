@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.List;
 
 
-
 /**
  * Request Processing Logic
  */
@@ -39,7 +38,7 @@ public class CustomerController {
         _log.info("handleHome is executed....");
 
 
-        response.getWriter().write("<h1>Customer Gaurav</h1>");
+        response.getWriter().write("<h1>Customer Listing</h1>");
 
     }
 
@@ -48,50 +47,58 @@ public class CustomerController {
      * and write the response back printing just the name of the
      * Customer object. The id based on which the customer object
      * is supposed to be retrieved comes as parameter to this mapping
+     */
+
+    @RequestMapping(path = "/customer")
+    public void handleGetCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String id = request.getParameter("id");
+        int customerId = Integer.parseInt(id);
+        Customer customer = customerService.getCustomer(customerId);
+
+        response.getWriter().write("<h1>" + customer.getName() + "</h1>");
+
+    }
+
+
+    /**
+     * Create a RequestMapping for path = "/update-names
+     * The request sent from the browser would look like : /update-name?id=101&new-name=PWC+INDIA
+     * Implement the mapping in such a way that the name changes to whatever is passed in new-name parameter
+     * for the customer whose id is whatever the value of id parameter is !
+     *
+     * to summarize as per the example : the name of customer with id =101 will change to PWC INDIA
      *
      */
 
+    @RequestMapping (path ="/update-name")
+    public void handleUpdateName(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    @RequestMapping(path = "/customer", method = {RequestMethod.GET})
-    public void handleGetCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String id = request.getParameter("id");
+        String newName = request.getParameter("new-name");
+
+        int customerId = Integer.parseInt(id);
+
+        Customer customer = customerService.updateCustomerName(customerId, newName);
+
+        response.getWriter().write("<h1>The new name is : " + customer.getName() + "</h1>");
 
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        Customer customer = customerService.getCustomer(id);
-
-
-        response.getWriter().write("<h1>" + customer.getName() +   customer.getAddress()+  "</h1>");
 
     }
 
     /**
-     * Create a RequestMapping for path = "/update-name
+     *
+     * Implement new method in this controller /update-address?id=101&new-address=Mumbai
+     * Hints a) Add a new method to CustomerDAO b) add a new method to CustomerService and call the CustomerDAO method
+     * c) Call the service method from this new controller method
+     *
+     * Controller >> Service >> DAO
+     *
      */
 
 
-    @RequestMapping(path = "/update-name", method = {RequestMethod.GET})
-    public void SetCustomerName(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String id= request.getParameter("id");
-        int customerid = Integer.parseInt(id);
-        String name= request.getParameter("new-name");
-        Customer customer = customerService.updateCustomerName(customerid,name);
 
-        response.getWriter().write("<h1>The new name is " + customer.getName() +  "</h1>");
-
-    }
-
-
-    @RequestMapping(path = "/update-address", method = {RequestMethod.GET})
-    public void SetCustomerAddress(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String id= request.getParameter("id");
-        int c_id = Integer.parseInt(id);
-        String address= request.getParameter("new-address");
-        Customer customer = customerService.updateCustomerAddress(c_id, address);
-
-        response.getWriter().write("<h1>The new address is " + customer.getAddress() +  "</h1>");
-
-    }
 
 
 }
-

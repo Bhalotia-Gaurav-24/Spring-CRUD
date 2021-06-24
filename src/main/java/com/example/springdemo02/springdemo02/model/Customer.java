@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Entity
 public class Customer {
 
-    @Id
+   @Id
     private int id;
 
     private String name;

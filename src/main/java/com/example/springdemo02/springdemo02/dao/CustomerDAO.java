@@ -39,13 +39,13 @@ public class CustomerDAO {
         Optional<Customer> optCustomer = customerRepository.findById(id);
 
         if (optCustomer.isPresent()) {
-            System.out.println("before get....");
+//            System.out.println("before get....");
             Customer customer = optCustomer.get();
             System.out.println(customer.getId());
 
-            System.out.println(customer.hashCode());
-            Optional<Customer> optCustomer2 = customerRepository.findById(id);
-            System.out.println(optCustomer2.get().hashCode());
+//            System.out.println(customer.hashCode());
+//            Optional<Customer> optCustomer2 = customerRepository.findById(id);
+//            System.out.println(optCustomer2.get().hashCode());
 
 
             return customer;
@@ -81,8 +81,6 @@ public class CustomerDAO {
     }
 
 
-
-
     @Transactional
     public Customer updateAddress(int id, String newAddress) {
 
@@ -91,9 +89,15 @@ public class CustomerDAO {
         if (optCustomer.isPresent()) {
             Customer customer = optCustomer.get();
 
-            customer.setAddress(newAddress);
+            customer.setName(newAddress);
 
             System.out.println(" ---- After setName ----");
+
+//            try {
+//                Thread.sleep(5000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
             return customer;
 
@@ -101,8 +105,6 @@ public class CustomerDAO {
             throw new RuntimeException("Customer with Id : " + id + " is not found");
         }
     }
-
-
 
 
 
