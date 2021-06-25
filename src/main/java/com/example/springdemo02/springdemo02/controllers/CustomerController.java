@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Request Processing Logic
  */
-@Controller
+//@Controller
 public class CustomerController {
 
 
