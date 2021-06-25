@@ -2,6 +2,7 @@ package com.example.springdemo02.springdemo02.restcontrollers;
 
 
 import com.example.springdemo02.springdemo02.model.Customer;
+import com.example.springdemo02.springdemo02.model.CustomerVO;
 import com.example.springdemo02.springdemo02.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +36,8 @@ public class CustomerRestController {
     }
 
     @PostMapping(path = "/customers")
-    public Customer addCustomer(@RequestBody Customer customer ){
-        System.out.println(customer.getId() + " -- " + customer.getName() + " -- " + customer.getAddress());
+    public Customer addCustomer(@RequestBody CustomerVO customerVO ){
+        System.out.println(customerVO.getId() + " -- " + customerVO.getName() + " -- " + customerVO.getAddress());
         return null;
     }
 

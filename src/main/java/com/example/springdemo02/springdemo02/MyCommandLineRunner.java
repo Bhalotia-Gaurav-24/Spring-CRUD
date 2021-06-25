@@ -40,5 +40,6 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
         System.out.println("This is the last thing that executes after the container is instantiated (The spring application has successfully started)");
 
+
     }
 }

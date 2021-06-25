@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,7 +29,7 @@ public class CustomerController {
     private static final Logger _log = LoggerFactory.getLogger("CustomerController");
 
 
-    @RequestMapping(path = "/home", method = {RequestMethod.GET})
+    @GetMapping(path = "/home")
     public void handleHome(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 
@@ -49,13 +50,11 @@ public class CustomerController {
      * is supposed to be retrieved comes as parameter to this mapping
      */
 
-    @RequestMapping(path = "/customer")
+    @GetMapping(path = "/customer")
     public void handleGetCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String id = request.getParameter("id");
-        int customerId = Integer.parseInt(id);
-        Customer customer = customerService.getCustomer(customerId);
-
+        Customer customer = customerService.getCustomer(Integer.parseInt(id));
         response.getWriter().write("<h1>" + customer.getName() + "</h1>");
 
     }
@@ -71,15 +70,13 @@ public class CustomerController {
      *
      */
 
-    @RequestMapping (path ="/update-name")
+    @GetMapping (path ="/update-name")
     public void handleUpdateName(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String id = request.getParameter("id");
         String newName = request.getParameter("new-name");
 
-        int customerId = Integer.parseInt(id);
-
-        Customer customer = customerService.updateCustomerName(customerId, newName);
+        Customer customer = customerService.updateCustomerName(Integer.parseInt(id), newName);
 
         response.getWriter().write("<h1>The new name is : " + customer.getName() + "</h1>");
 
@@ -96,8 +93,6 @@ public class CustomerController {
      * Controller >> Service >> DAO
      *
      */
-
-
 
 
 

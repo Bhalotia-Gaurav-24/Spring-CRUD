@@ -4,6 +4,7 @@ package com.example.springdemo02.springdemo02.services;
 
 import com.example.springdemo02.springdemo02.dao.CustomerDAO;
 import com.example.springdemo02.springdemo02.model.Customer;
+import com.example.springdemo02.springdemo02.model.CustomerVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +39,12 @@ public class CustomerService {
 
     public Customer updateCustomerAddress(int id, String address) {
      return customerDAO.updateAddress(id,address);
+    }
+    //////////////////////////////
+    public Customer createCustomer(CustomerVO customerVO)
+    {
+        Customer customer  = customerDAO.createCustomer(customerVO.getId(), customerVO.getName(), customerVO.getAddress());
+
+        return customer;
     }
 }

@@ -6,6 +6,7 @@ import com.example.springdemo02.springdemo02.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,7 @@ public class ProductController {
     ProductService productService;
 
 
-    @RequestMapping(path ="/products")
+    @RequestMapping(path ="/products", method = {RequestMethod.GET})
 
     public void handleGetProducts(HttpServletRequest request, HttpServletResponse response) {
 
