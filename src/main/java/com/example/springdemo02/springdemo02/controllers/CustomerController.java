@@ -52,10 +52,10 @@ public class CustomerController {
 
     @GetMapping(path = "/customer")
     public void handleGetCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        String id = request.getParameter("id");
-        Customer customer = customerService.getCustomer(Integer.parseInt(id));
-        response.getWriter().write("<h1>" + customer.getName() + "</h1>");
+//
+//        String id = request.getParameter("id");
+//        Customer customer = customerService.getCustomer(Integer.parseInt(id));
+//        response.getWriter().write("<h1>" + customer.getName() + "</h1>");
 
     }
 

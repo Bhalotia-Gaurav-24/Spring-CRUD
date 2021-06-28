@@ -22,6 +22,21 @@ public class CustomerDAOTest {
     @Autowired
     CustomerDAO customerDAO;
 
+    @Test
+    public void when_entity_manager()
+    {
+        customerDAO.getCustomerByComplexCondition();
+
+    }
+
+
+    @Test
+    public void when_entity_manager2()
+    {
+        customerDAO.getCustomerByComplexConditionUsingJpaQL("PwC India");
+
+    }
+
 
         @Test
         public void when_get_customer_then_get_list_customer(){
@@ -41,9 +56,9 @@ public class CustomerDAOTest {
 //
     @Test
     public void when_get_customer_then_not_null_customer(){
-            int id=101;
-            Customer customer = customerDAO.getCustomer(id);
-           //Assert.isNull(customer != null);
-        Assert.isTrue((customer.getId()==id),"matched");
+//            int id=101;
+//            Customer customer = customerDAO.getCustomer(id);
+//           //Assert.isNull(customer != null);
+//        Assert.isTrue((customer.getId()==id),"matched");
     }
 }

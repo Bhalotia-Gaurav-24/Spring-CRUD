@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Business Logic to be implemented here for all business methods
@@ -28,8 +29,17 @@ public class CustomerService {
 
     }
 
-    public Customer getCustomer(int id){
-        return  customerDAO.getCustomer(id);
+    public Customer getCustomer(int id) throws CustomerNotFoundException {
+        Optional<Customer> customerOptional = customerDAO.getCustomer(id);
+
+        if(customerOptional.isPresent()){
+            return customerOptional.get();
+
+        }
+        else{
+            throw new CustomerNotFoundException("customer with id "+ id + "not found!");
+        }
+       // return  customerDAO.getCustomer(id);
     }
 
     public Customer updateCustomerName(int id, String name) {
@@ -40,11 +50,21 @@ public class CustomerService {
     public Customer updateCustomerAddress(int id, String address) {
      return customerDAO.updateAddress(id,address);
     }
+
+    public List<Customer> getCustomersByAddress(String address)
+    {
+        return customerDAO.getCustomersByAddress(address);
+    }
     //////////////////////////////
     public Customer createCustomer(CustomerVO customerVO)
     {
         Customer customer  = customerDAO.createCustomer(customerVO.getId(), customerVO.getName(), customerVO.getAddress());
 
         return customer;
+    }
+
+    public List<Customer> getCustomersByName(String name) {
+
+        return customerDAO.getCustomersByName(name);
     }
 }
